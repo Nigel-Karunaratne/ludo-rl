@@ -1,0 +1,25 @@
+flowchart
+
+
+board class maintains the state of the board
+
+create a GameInstance (initializes turn order, has a ref to a Board?)
+    Main function calls update and draw on GameInstance
+create a Board (initializes a board w/ state)
+
+GameInstance
+    vector of Player class -- players
+    array of player numbers? -- turn order
+    Board&
+    TurnState& currentTurn
+
+
+Player Class:
+    color
+    color id?
+    input device
+
+
+ScreenManager (class, instance in main)
+    - keeps instance of active screen
+    - handles all draw calls
