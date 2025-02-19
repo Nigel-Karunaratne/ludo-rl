@@ -1,6 +1,6 @@
 CXX := g++
 CXXFLAGS := -std=c++17 -Wall -Wextra -Wunused-function
-LINKFLAGS := -mwindows
+LINKFLAGS := #-mwindows #UNCOMMENT WHEN NOT DEBUGGING!!! hides the console
 
 
 SOURCES := $(wildcard src/*.cpp)
@@ -22,8 +22,8 @@ full: $(EXE) run
 
 $(EXE): $(OBJECTS)
 	g++ $(LINKFLAGS) $(OBJECTS) $(COFF) -o $(EXE) $(LIBS) -g
-# mkdir -p $(BIN)$(ASSETS_DIR)
-# cp -r $(ASSETS_DIR) $(BIN)
+	mkdir -p $(BIN)$(ASSETS_DIR)
+	cp -r $(ASSETS_DIR) $(BIN)
 
 -include $(DEPENDS)
 

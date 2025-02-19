@@ -3,7 +3,11 @@
 #include "board.h"
 #include "applicationstate.h"
 
+#include "spritemanager.h"
+#include "audiomanager.h"
+
 #include "window_constants.h"
+#include "screen_loading.h"
 #include "screen_title.h"
 #include "screen_setup.h"
 #include "screen_game.h"
@@ -22,7 +26,7 @@ int main(int argc, char* argv[])
 {
     UNUSED(argc);
     UNUSED(argv);
-    ApplicationState applicationState = ApplicationState::TITLE;
+    ApplicationState applicationState = ApplicationState::LOADING;
 
     rl::Window window(WINDOW_WIDTH, WINDOW_HEIGHT, "ludo-rl", FLAG_WINDOW_RESIZABLE);
     window.SetTargetFPS(60);
@@ -32,13 +36,17 @@ int main(int argc, char* argv[])
     int windowScale = MIN((float)GetScreenWidth()/WINDOW_WIDTH, (float)GetScreenHeight()/WINDOW_HEIGHT);
 
     InputManager input = InputManager();
+    SpriteManager sprite = SpriteManager();
+    AudioManager audio = AudioManager();
 
     // TODO - abstract to Screen abstract class w/ virtual voids Draw and Update? can replace these w/ smart pointers
     // Actually, see how the game screen class functions. May need to inherit pause screen from it!
+    LoadingScreen loadingScreen = LoadingScreen(sprite, audio);
     TitleScreen titleScreen = TitleScreen();
     SetupScreen setupScreen = SetupScreen();
     GameScreen gameScreen;
-    
+
+    loadingScreen.FindFilesToLoad();
 
     while(!window.ShouldClose() && applicationState != ApplicationState::QUIT)
     {
@@ -53,7 +61,7 @@ int main(int argc, char* argv[])
         switch (applicationState)
         {
         case ApplicationState::LOADING:
-            // UpdateLoading();
+            loadingScreen.Update(window, input, newState);
             break;
         case ApplicationState::TITLE:
             titleScreen.Update(window, input, newState);
@@ -73,8 +81,9 @@ int main(int argc, char* argv[])
             if(applicationState == ApplicationState::SETUP && newState == ApplicationState::GAME)
             {
                 // Create LudoInstance and pass in configuration?
+                gameScreen = GameScreen(setupScreen.GetConfiguration());
             }
-            
+
             applicationState = newState;
         }
 
@@ -84,6 +93,7 @@ int main(int argc, char* argv[])
             switch (applicationState)
             {
             case ApplicationState::LOADING:
+                loadingScreen.Draw(window);
                 break;
             case ApplicationState::TITLE:
                 titleScreen.Draw(window);
@@ -91,7 +101,13 @@ int main(int argc, char* argv[])
             case ApplicationState::SETUP:
                 setupScreen.Draw(window);
                 break;
-            
+            case ApplicationState::GAME:
+                gameScreen.Draw(window);
+                break;
+            // case ApplicationState::PAUSE:
+                // gameScreen.Draw(window);
+                // pauseScreen.Draw(window);
+                // break;
             default:
                 break;
             }
