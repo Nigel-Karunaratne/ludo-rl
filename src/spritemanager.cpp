@@ -12,6 +12,7 @@ SpriteManager::~SpriteManager()
 
 bool SpriteManager::AddTexture(std::string name, std::string path)
 {
+    std::string newname = path.substr(0,path.find('.'));
     Texture2D texture = ::LoadTexture(path.c_str());
     textureTable.insert({name,texture});
 }

@@ -1,5 +1,5 @@
 CXX := g++
-CXXFLAGS := -std=c++17 -Wall -Wextra -Wunused-function
+CXXFLAGS := -std=c++17 -Wall -Wextra -Wunused-function -Wno-unused-parameter #remove -Wno-unused-parameter when done.
 LINKFLAGS := #-mwindows #UNCOMMENT WHEN NOT DEBUGGING!!! hides the console
 
 

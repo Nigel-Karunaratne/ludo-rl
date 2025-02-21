@@ -8,11 +8,11 @@ LoadingScreen::LoadingScreen(SpriteManager &spriteManager, AudioManager &audioMa
 LoadingScreen::~LoadingScreen() {}
 
 // TODO - just load all at once? only a few files are necessary to load... (1 spritesheet, 1 board, small amount of audio files)
-void LoadingScreen::FindFilesToLoad()
+void LoadingScreen::QueueFilesToLoad()
 {
-    // FIXME - not working!
-    audioFilesToLoad = rl::LoadDirectoryFiles(std::string(::GetApplicationDirectory()).append("assets\\sound"));
-    textureFilesToLoad = rl::LoadDirectoryFiles(std::string(::GetApplicationDirectory()).append("assets\\sprite"));
+    textureFilesToLoad.emplace_back("assets/CafeAuLaitGrid.png");
+    
+    audioFilesToLoad.emplace_back("coin.wav");
 
     std::cout << std::string(::GetApplicationDirectory()).append("assets\\sound") << std::endl;
 

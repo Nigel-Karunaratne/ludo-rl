@@ -26,7 +26,7 @@ int main(int argc, char* argv[])
 {
     UNUSED(argc);
     UNUSED(argv);
-    ApplicationState applicationState = ApplicationState::LOADING;
+    ApplicationState applicationState = ApplicationState::TITLE;
 
     rl::Window window(WINDOW_WIDTH, WINDOW_HEIGHT, "ludo-rl", FLAG_WINDOW_RESIZABLE);
     window.SetTargetFPS(60);
@@ -46,7 +46,7 @@ int main(int argc, char* argv[])
     SetupScreen setupScreen = SetupScreen();
     GameScreen gameScreen;
 
-    loadingScreen.FindFilesToLoad();
+    loadingScreen.QueueFilesToLoad();
 
     while(!window.ShouldClose() && applicationState != ApplicationState::QUIT)
     {

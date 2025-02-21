@@ -28,7 +28,7 @@ public:
     LoadingScreen(SpriteManager& spriteManager, AudioManager& audioManager);
     ~LoadingScreen();
 
-    void FindFilesToLoad();
+    void QueueFilesToLoad();
 
     void Draw(rl::Window& window);
     void Update(rl::Window& window, InputManager& input, ApplicationState& modifiedState);
