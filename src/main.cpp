@@ -104,10 +104,10 @@ int main(int argc, char* argv[])
             case ApplicationState::GAME:
                 gameScreen.Draw(window);
                 break;
-            // case ApplicationState::PAUSE:
-                // gameScreen.Draw(window);
+            case ApplicationState::PAUSE:
+                gameScreen.Draw(window);
                 // pauseScreen.Draw(window);
-                // break;
+                break;
             default:
                 break;
             }
