@@ -10,7 +10,7 @@ InputManager::~InputManager()
 
 bool InputManager::IsUiEnterPressed()
 {
-    return rl::Keyboard::IsKeyPressed(KeyboardKey::KEY_ENTER) || IsKeyPressed(KeyboardKey::KEY_SPACE) || gamepad.IsButtonPressed(GAMEPAD_BUTTON_RIGHT_FACE_DOWN);
+    return rl::Keyboard::IsKeyPressed(KeyboardKey::KEY_ENTER) || rl::Keyboard::IsKeyPressed(KeyboardKey::KEY_SPACE) || gamepad.IsButtonPressed(GAMEPAD_BUTTON_RIGHT_FACE_DOWN);
 }
 
 bool InputManager::IsUiBackPressed()
@@ -36,4 +36,9 @@ bool InputManager::IsUiLeftPressed()
 bool InputManager::IsUiRightPressed()
 {
     return rl::Keyboard::IsKeyPressed(KeyboardKey::KEY_RIGHT) || gamepad.IsButtonPressed(GAMEPAD_BUTTON_LEFT_FACE_RIGHT);
+}
+
+bool InputManager::IsRollPressed()
+{
+    return rl::Keyboard::IsKeyPressed(KeyboardKey::KEY_SPACE) || rl::Keyboard::IsKeyPressed(KeyboardKey::KEY_ENTER) || gamepad.IsButtonPressed(GAMEPAD_BUTTON_RIGHT_FACE_DOWN);
 }

@@ -61,6 +61,21 @@ public:
     bool IsSpaceThroughGoalValid(int currentPosition, int numberOfSpaces, PlayerColors color);
     bool IsSpaceThroughGoalValid(int currentPosition, PlayerColors color);
     BoardSpace GetSpaceThroughGoal(int currentPosition, int numberOfSpaces, PlayerColors color);
+
+    std::vector<int>& GetPieces(PlayerColors color)
+    {
+        switch (color)
+        {
+            case PlayerColors::PLAYER_BLUE:
+                return bluePieces;
+            case PlayerColors::PLAYER_RED:
+                return redPieces;
+            case PlayerColors::PLAYER_GREEN:
+                return greenPieces;
+            case PlayerColors::PLAYER_YELLOW:
+                return yellowPieces;
+        }
+    }
 };
 
 Board::Board()

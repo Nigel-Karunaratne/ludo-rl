@@ -26,4 +26,6 @@ public:
     bool IsUiDownPressed();
     bool IsUiLeftPressed();
     bool IsUiRightPressed();
+
+    bool IsRollPressed();
 };
